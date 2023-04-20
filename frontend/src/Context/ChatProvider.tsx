@@ -21,6 +21,8 @@ interface IChatContext {
   setSelectedChat: React.Dispatch<any>;
   chats: any;
   setChats: React.Dispatch<any>;
+  notifications: any;
+  setNotifications: React.Dispatch<any>;
 }
 
 const ChatContext = createContext<IChatContext>({} as IChatContext);
@@ -29,6 +31,7 @@ const ChatProvider = ({ children }: IChatProviderProps) => {
   const [user, setUser] = useState<IUser>();
   const [selectedChat, setSelectedChat] = useState<any>();
   const [chats, setChats] = useState<any>([]);
+  const [notifications, setNotifications] = useState<any>([]);
 
   const navigate = useNavigate();
 
@@ -44,7 +47,16 @@ const ChatProvider = ({ children }: IChatProviderProps) => {
 
   return (
     <ChatContext.Provider
-      value={{ user, setUser, selectedChat, setSelectedChat, chats, setChats }}
+      value={{
+        user,
+        setUser,
+        selectedChat,
+        setSelectedChat,
+        chats,
+        setChats,
+        notifications,
+        setNotifications,
+      }}
     >
       {children}
     </ChatContext.Provider>

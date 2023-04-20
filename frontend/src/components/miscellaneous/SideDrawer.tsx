@@ -28,6 +28,9 @@ import { useNavigate } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 import ChatLoading from '../ChatLoading';
 import UserListItem from '../UserAvatar/UserListItem';
+import { getSender } from '../../config/ChatLogics';
+import NotificationBadge from 'react-notification-badge';
+import { Effect } from 'react-notification-badge';
 
 const SideDrawer = () => {
   const [search, setSearch] = useState<string>('');
@@ -35,7 +38,14 @@ const SideDrawer = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingChat, setLoadingChat] = useState<boolean>();
 
-  const { user, setSelectedChat, chats, setChats } = ChatState();
+  const {
+    user,
+    setSelectedChat,
+    chats,
+    setChats,
+    notifications,
+    setNotifications,
+  } = ChatState();
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cookies = new Cookies();
@@ -152,9 +162,33 @@ const SideDrawer = () => {
         <div>
           <Menu>
             <MenuButton p={1}>
+              <NotificationBadge 
+              count={notifications.length}
+              effect={Effect.SCALE}
+              />
               <BellIcon fontSize="2xl" m={1} />
             </MenuButton>
-            {/* <MenuList></MenuList> */}
+            <MenuList pl={2}>
+              {!notifications.length && 'No new messages'}
+              {notifications.map((notification: any) => (
+                <MenuItem
+                  key={notification._id}
+                  onClick={() => {
+                    setSelectedChat(notification.chat);
+                    setNotifications(
+                      notifications.filter((n: any) => n !== notification)
+                    );
+                  }}
+                >
+                  {notification.chat.isGroupChat
+                    ? `New Message in ${notification.chat.chatName}`
+                    : `New Message from ${getSender(
+                        user,
+                        notification.chat.users
+                      )}`}
+                </MenuItem>
+              ))}
+            </MenuList>
           </Menu>
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>

@@ -13,7 +13,15 @@ exports.createMessage = asyncHandler(async (req, res, next) => {
   };
 
   let message = await Message.create(newMessage);
-  message = await message.populate('sender chat');
+
+  message = await message.populate('sender');
+
+  message = await message.populate({
+    path: 'chat',
+    populate: {
+      path: 'users',
+    },
+  });
 
   await Chat.findByIdAndUpdate(chatId, {
     latestMessage: message,

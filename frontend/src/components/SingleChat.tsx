@@ -42,7 +42,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }: any) => {
 
   const toast = useToast();
 
-  const { user, selectedChat, setSelectedChat } = ChatState();
+  const { user, selectedChat, setSelectedChat, notifications, setNotifications } =
+    ChatState();
 
   const fetchMessages = async () => {
     if (!selectedChat) return;
@@ -101,7 +102,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }: any) => {
         !selectedChatCompare ||
         selectedChatCompare._id !== newMessageReceived.chat._id
       ) {
-        // give notification
+        if (!notifications.includes(newMessageReceived)) {
+          setNotifications([newMessageReceived, ...notifications]);
+          setFetchAgain(!fetchAgain);
+        }
       } else {
         setMessages([...messages, newMessageReceived]);
       }
