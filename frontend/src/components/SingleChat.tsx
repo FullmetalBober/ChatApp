@@ -12,7 +12,7 @@ import { ArrowBackIcon } from '@chakra-ui/icons';
 import { getSender, getSenderFull } from '../config/ChatLogics';
 import ProfileModal from './miscellaneous/ProfileModal';
 import UpdateGroupChatModal from './miscellaneous/UpdateGroupChatModal';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import axios, { AxiosError } from 'axios';
 import './styles.css';
 import ScrollableChat from './ScrollableChat';
@@ -39,7 +39,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }: any) => {
     setNotifications,
   } = ChatState();
 
-  const fetchMessages = async () => {
+  const fetchMessages = useCallback(async () => {
     if (!selectedChat) return;
 
     try {
@@ -74,7 +74,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }: any) => {
       });
       setLoading(false);
     }
-  };
+  }, [selectedChat, toast]);
 
   useEffect(() => {
     socket = io(ENDPOINT);
@@ -82,13 +82,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }: any) => {
     socket.on('connected', () => setSocketConnected(true));
     socket.on('typing', () => setIsTyping(true));
     socket.on('stop typing', () => setIsTyping(false));
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     fetchMessages();
-
     selectedChatCompare = selectedChat;
-  }, [selectedChat]);
+  }, [selectedChat, fetchMessages]);
 
   useEffect(() => {
     socket.on('message received', (newMessageReceived: any) => {
