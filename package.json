@@ -4,8 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon backend/server.js",
-    "debug": "ndb backend/server.js"
+    "start": "node backend/server.js",
+    "start:dev": "set NODE_ENV=development& nodemon backend/server.js",
+    "start:prod": "set NODE_ENV=production& nodemon backend/server.js",
+    "debug:dev": "set NODE_ENV=development& ndb backend/server.js",
+    "debug:prod": "set NODE_ENV=production& ndb backend/server.js"
   },
   "author": "Vladyslav Mankivskyi",
   "license": "ISC",

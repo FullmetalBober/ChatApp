@@ -7,8 +7,6 @@ import {
   Text,
   useToast,
 } from '@chakra-ui/react';
-import Lottie from 'react-lottie';
-import animationData from '../animations/typing.json';
 import { ChatState } from '../Context/ChatProvider';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { getSender, getSenderFull } from '../config/ChatLogics';
@@ -19,6 +17,7 @@ import axios, { AxiosError } from 'axios';
 import './styles.css';
 import ScrollableChat from './ScrollableChat';
 import { io } from 'socket.io-client';
+import Typing from './miscellaneous/Typing';
 
 const ENDPOINT = 'http://localhost:8000';
 let socket: any, selectedChatCompare: any;
@@ -28,22 +27,17 @@ const SingleChat = ({ fetchAgain, setFetchAgain }: any) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [newMessage, setNewMessage] = useState<string>('');
   const [socketConnected, setSocketConnected] = useState<boolean>(false);
-  const [typing, setTyping] = useState<boolean>(false);
   const [isTyping, setIsTyping] = useState<boolean>(false);
-
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
-  };
 
   const toast = useToast();
 
-  const { user, selectedChat, setSelectedChat, notifications, setNotifications } =
-    ChatState();
+  const {
+    user,
+    selectedChat,
+    setSelectedChat,
+    notifications,
+    setNotifications,
+  } = ChatState();
 
   const fetchMessages = async () => {
     if (!selectedChat) return;
@@ -163,7 +157,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }: any) => {
     <>
       {selectedChat ? (
         <>
-          <Text
+          <Box
             fontSize={{ base: '28px', md: '30px' }}
             pb={3}
             px={2}
@@ -181,7 +175,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }: any) => {
             />
             {!selectedChat.isGroupChat ? (
               <>
-                {getSender(user, selectedChat.users)}
+                <Box display="flex">
+                  {getSender(user, selectedChat.users)}
+                  {isTyping && <Typing />}
+                </Box>
                 <ProfileModal user={getSenderFull(user, selectedChat.users)} />
               </>
             ) : (
@@ -194,7 +191,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }: any) => {
                 />
               </>
             )}
-          </Text>
+          </Box>
           <Box
             display="flex"
             flexDir="column"
@@ -221,17 +218,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }: any) => {
             )}
 
             <FormControl onKeyDown={sendMessage} isRequired marginTop={3}>
-              {isTyping ? (
-                <div>
-                  <Lottie
-                    options={defaultOptions}
-                    width={70}
-                    style={{ marginBottom: 15, marginLeft: 0 }}
-                  />
-                </div>
-              ) : (
-                <></>
-              )}
               <Input
                 variant="filled"
                 bg="#E0E0E0"
