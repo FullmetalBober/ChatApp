@@ -107,6 +107,8 @@ const SignUp = () => {
         position: 'bottom',
       });
 
+      console.log(data.data);
+
       const cookies = new Cookies();
       cookies.set('userInfo', data.data, {
         path: '/',
@@ -134,7 +136,7 @@ const SignUp = () => {
 
   return (
     <VStack spacing="5px" color="black">
-      <FormControl id="first-name" isRequired>
+      <FormControl id="first-name_signUp" isRequired>
         <FormLabel>Name</FormLabel>
         <Input
           placeholder="Enter Your Name"
@@ -142,7 +144,7 @@ const SignUp = () => {
         />
       </FormControl>
 
-      <FormControl id="email" isRequired>
+      <FormControl id="email_signUp" isRequired>
         <FormLabel>Email</FormLabel>
         <Input
           placeholder="Enter Your Email"
@@ -150,7 +152,7 @@ const SignUp = () => {
         />
       </FormControl>
 
-      <FormControl id="password" isRequired>
+      <FormControl id="password_signUp" isRequired>
         <FormLabel>Password</FormLabel>
         <InputGroup>
           <Input
@@ -166,7 +168,7 @@ const SignUp = () => {
         </InputGroup>
       </FormControl>
 
-      <FormControl id="passwordConfirm" isRequired>
+      <FormControl id="passwordConfirm_signUp" isRequired>
         <FormLabel>Password Confirm</FormLabel>
         <InputGroup>
           <Input
@@ -182,7 +184,7 @@ const SignUp = () => {
         </InputGroup>
       </FormControl>
 
-      <FormControl id="pic">
+      <FormControl id="pic_signUp">
         <FormLabel>Profile Picture</FormLabel>
         <Input type="file" p={1.5} accept="image/*" onChange={postDetails} />
       </FormControl>
