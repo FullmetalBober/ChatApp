@@ -56,8 +56,8 @@ const Login = () => {
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       });
 
-      navigate('/chats');
       setLoading(false);
+      navigate('/chats');
     } catch (error) {
       console.log(error);
       let errorMessage = 'Something went wrong';
@@ -76,7 +76,7 @@ const Login = () => {
   };
 
   return (
-    <VStack spacing="5px" color="black">
+    <VStack spacing="5px">
       <FormControl id="email_login" isRequired>
         <FormLabel>Email</FormLabel>
         <Input

@@ -142,7 +142,7 @@ const GroupChatModal = ({ children }: any) => {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bg="#44475a" color="#f8f8f2">
           <ModalHeader
             fontSize="35px"
             fontFamily="Work sans"
@@ -157,6 +157,8 @@ const GroupChatModal = ({ children }: any) => {
               <Input
                 placeholder="Chat Name"
                 mb={3}
+                borderColor="#6272a4"
+                focusBorderColor="#6272a4"
                 onChange={e => setGroupChatName(e.target.value)}
               />
             </FormControl>
@@ -164,6 +166,8 @@ const GroupChatModal = ({ children }: any) => {
               <Input
                 placeholder="Add Users"
                 mb={1}
+                borderColor="#6272a4"
+                focusBorderColor="#6272a4"
                 onChange={e => handleSearch(e.target.value)}
               />
             </FormControl>

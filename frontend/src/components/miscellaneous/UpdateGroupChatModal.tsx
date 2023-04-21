@@ -228,6 +228,8 @@ const UpdateGroupChatModal = ({
     <>
       <IconButton
         display={{ base: 'flex' }}
+        colorScheme="whiteAlpha"
+        bg="#535669"
         icon={<ViewIcon />}
         onClick={onOpen}
         aria-label="view"
@@ -235,7 +237,7 @@ const UpdateGroupChatModal = ({
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bg="#44475a" color="#f8f8f2">
           <ModalHeader
             fontSize="35px"
             fontFamily="Work sans"
@@ -259,6 +261,8 @@ const UpdateGroupChatModal = ({
               <Input
                 placeholder="Chat Name"
                 mb={3}
+                borderColor="#6272a4"
+                focusBorderColor="#6272a4"
                 value={groupChatName}
                 onChange={e => setGroupChatName(e.target.value)}
               />
@@ -276,6 +280,8 @@ const UpdateGroupChatModal = ({
               <Input
                 placeholder="Add User to group"
                 mb={1}
+                borderColor="#6272a4"
+                focusBorderColor="#6272a4"
                 onChange={e => handleSearch(e.target.value)}
               />
             </FormControl>

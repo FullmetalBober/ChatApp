@@ -11,7 +11,6 @@ const UserBadgeItem = ({ user, handleFunction }: any) => {
       mb={2}
       fontSize={12}
       bg="purple"
-      color="white"
       cursor="pointer"
       onClick={handleFunction}
     >

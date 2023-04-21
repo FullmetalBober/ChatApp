@@ -10,6 +10,7 @@ import GroupChatModal from './miscellaneous/GroupChatModal';
 
 const MyChats = ({ fetchAgain }: any) => {
   const [loggedUser, setLoggedUser] = useState<any>();
+  const [loading, setLoading] = useState<boolean>(true);
   const { selectedChat, setSelectedChat, chats, setChats } = ChatState();
 
   const toast = useToast();
@@ -43,18 +44,21 @@ const MyChats = ({ fetchAgain }: any) => {
     const cookies = new Cookies();
     setLoggedUser(cookies.get('userInfo').user);
     fetchChats();
+    setLoading(false);
   }, [fetchAgain, fetchChats]);
 
+  if (loading) return <div></div>;
   return (
     <Box
       display={{ base: selectedChat ? 'none' : 'flex', md: 'flex' }}
       flexDir="column"
       alignItems="center"
       p={3}
-      bg="white"
+      bg="#44475a"
       w={{ base: '100%', md: '31%' }}
       borderRadius="lg"
       borderWidth="1px"
+      borderColor="#6272a4"
     >
       <Box
         pb={3}
@@ -72,6 +76,8 @@ const MyChats = ({ fetchAgain }: any) => {
             display="flex"
             fontSize={{ base: '17px', md: '10px', lg: '17px' }}
             rightIcon={<AddIcon />}
+            colorScheme="whiteAlpha"
+            bg="transparent"
           >
             New Group Chat
           </Button>
@@ -81,7 +87,7 @@ const MyChats = ({ fetchAgain }: any) => {
         display="flex"
         flexDir="column"
         p={3}
-        bg="#F8F8F8"
+        bg="#44475a"
         w="100%"
         h="100%"
         borderRadius="lg"
@@ -93,8 +99,8 @@ const MyChats = ({ fetchAgain }: any) => {
               <Box
                 onClick={() => setSelectedChat(chat)}
                 cursor="pointer"
-                bg={selectedChat === chat ? '#38B2AC' : '#E8E8E8'}
-                color={selectedChat === chat ? 'white' : 'black'}
+                bg={selectedChat === chat ? '#717284' : '#535669'}
+                color={selectedChat === chat ? '#f8f8f2' : '#f8f8f2'}
                 px={3}
                 py={2}
                 borderRadius="lg"

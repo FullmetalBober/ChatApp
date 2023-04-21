@@ -158,17 +158,21 @@ const SingleChat = ({ fetchAgain, setFetchAgain }: any) => {
         <>
           <Box
             fontSize={{ base: '28px', md: '30px' }}
-            pb={3}
+            pb={2.5}
             px={2}
             w="100%"
             fontFamily="Work sans"
             display="flex"
             justifyContent={{ base: 'space-between' }}
             alignItems="center"
+            borderBottom="1px"
+            borderColor='#6272a4'
           >
             <IconButton
               display={{ base: 'flex', md: 'none' }}
               icon={<ArrowBackIcon />}
+              colorScheme="whiteAlpha"
+              bg="#535669"
               onClick={() => setSelectedChat('')}
               aria-label="back"
             />
@@ -196,7 +200,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }: any) => {
             flexDir="column"
             justifyContent="flex-end"
             p={3}
-            bg="#E8E8E8"
             w="100%"
             h="100%"
             borderRadius="lg"
@@ -218,8 +221,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }: any) => {
 
             <FormControl onKeyDown={sendMessage} isRequired marginTop={3}>
               <Input
-                variant="filled"
-                bg="#E0E0E0"
+                borderColor="#6272a4"
+                focusBorderColor="#6272a4"
                 placeholder="Enter a message..."
                 onChange={typingHandler}
                 value={newMessage}

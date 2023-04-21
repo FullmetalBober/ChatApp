@@ -55,6 +55,21 @@ const SideDrawer = () => {
       path: '/',
       expires: new Date(Date.now()),
     });
+    try {
+      axios.get('/api/users/logout');
+    } catch (error) {
+      let errorMessage = 'Something went wrong';
+      if (error instanceof AxiosError)
+        errorMessage = error.response?.data.message;
+      toast({
+        title: errorMessage,
+        description: 'Please try again',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom',
+      });
+    }
     navigate('/');
   };
 
@@ -143,13 +158,15 @@ const SideDrawer = () => {
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        bg="white"
+        bg="#44475a"
         w="100%"
         p="5px 10px 5px 10px"
         borderWidth="5px"
+        borderColor="#282a36"
+        borderRadius="lg"
       >
         <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
-          <Button variant="ghost" onClick={onOpen}>
+          <Button colorScheme="whiteAlpha" bg="transparent" onClick={onOpen}>
             <i className="fas fa-search"></i>
             <Text display={{ base: 'none', md: 'flex' }} px="4">
               Search User
@@ -168,11 +185,15 @@ const SideDrawer = () => {
               />
               <BellIcon fontSize="2xl" m={1} />
             </MenuButton>
-            <MenuList pl={2}>
-              {!notifications.length && 'No new messages'}
+            <MenuList ml={2} bg="#6c6f86" borderColor="#6272a4">
+              {!notifications.length && (
+                <Text textAlign="center">No new messages</Text>
+              )}
               {notifications.map((notification: any) => (
                 <MenuItem
                   key={notification._id}
+                  bg="#6c6f86"
+                  _hover={{ bg: '#a0a3b1' }}
                   onClick={() => {
                     setSelectedChat(notification.chat);
                     setNotifications(
@@ -191,7 +212,12 @@ const SideDrawer = () => {
             </MenuList>
           </Menu>
           <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+            <MenuButton
+              as={Button}
+              rightIcon={<ChevronDownIcon />}
+              colorScheme="whiteAlpha"
+              bg="transparent"
+            >
               <Avatar
                 size="sm"
                 cursor="pointer"
@@ -199,12 +225,20 @@ const SideDrawer = () => {
                 src={user?.pic}
               />
             </MenuButton>
-            <MenuList>
+            <MenuList bg="#6c6f86" borderColor="#6272a4">
               <ProfileModal user={user}>
-                <MenuItem>My Profile</MenuItem>
+                <MenuItem bg="#6c6f86" _hover={{ bg: '#a0a3b1' }}>
+                  My Profile
+                </MenuItem>
               </ProfileModal>
-              <MenuDivider />
-              <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+              <MenuDivider borderColor="#dcdcdc" />
+              <MenuItem
+                bg="#6c6f86"
+                _hover={{ bg: '#a0a3b1' }}
+                onClick={logoutHandler}
+              >
+                Logout
+              </MenuItem>
             </MenuList>
           </Menu>
         </div>
@@ -212,17 +246,27 @@ const SideDrawer = () => {
 
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
-        <DrawerContent>
-          <DrawerHeader borderBottomWidth="1px">Search Users</DrawerHeader>
+        <DrawerContent bg="#44475a" color="#f8f8f2">
+          <DrawerHeader borderBottomWidth="1px" borderColor="#dcdcdc">
+            Search Users
+          </DrawerHeader>
           <DrawerBody>
             <Box display="flex" pb={2}>
               <Input
                 placeholder="Search by name or email"
                 mr={2}
+                borderColor="#6272a4"
+                focusBorderColor="#6272a4"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
               />
-              <Button onClick={handleSearch}>Go</Button>
+              <Button
+                colorScheme="whiteAlpha"
+                bg="#535669"
+                onClick={handleSearch}
+              >
+                Go
+              </Button>
             </Box>
             {loading ? (
               <ChatLoading />

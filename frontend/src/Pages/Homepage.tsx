@@ -36,23 +36,24 @@ const Homepage = () => {
         display="flex"
         justifyContent="center"
         p={3}
-        bg="white"
+        bg="#44475a"
         w="100%"
         m="40px 0 15px 0"
         borderRadius="lg"
         borderWidth="1px"
+        borderColor="#6272a4"
       >
-        <Text fontSize="4xl" fontFamily="Work sans" color="black">
+        <Text fontSize="4xl" fontFamily="Work sans">
           My Chat
         </Text>
       </Box>
       <Box
-        bg="white"
-        color="black"
+        bg="#44475a"
         w="100%"
         p={4}
         borderRadius="lg"
         borderWidth="1px"
+        borderColor="#6272a4"
       >
         <Tabs variant="soft-rounded">
           <TabList mb="1em">

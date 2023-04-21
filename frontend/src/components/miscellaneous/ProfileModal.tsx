@@ -24,6 +24,8 @@ const ProfileModal = ({ user, children }: any) => {
       ) : (
         <IconButton
           display={{ base: 'flex' }}
+          colorScheme="whiteAlpha"
+          bg="#535669"
           icon={<ViewIcon />}
           onClick={onOpen}
           aria-label="Open modal dialog"
@@ -31,7 +33,7 @@ const ProfileModal = ({ user, children }: any) => {
       )}
       <Modal size="lg" isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
-        <ModalContent h="410px">
+        <ModalContent h="410px" bg='#44475a' color='#f8f8f2'>
           <ModalHeader
             fontSize="40px"
             fontFamily="Work sans"
