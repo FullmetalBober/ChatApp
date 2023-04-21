@@ -135,11 +135,13 @@ const SignUp = () => {
   };
 
   return (
-    <VStack spacing="5px" color="black">
+    <VStack spacing="5px">
       <FormControl id="first-name_signUp" isRequired>
         <FormLabel>Name</FormLabel>
         <Input
           placeholder="Enter Your Name"
+          borderColor="#6272a4"
+          focusBorderColor="#6272a4"
           onChange={e => setName(e.target.value)}
         />
       </FormControl>
@@ -147,7 +149,10 @@ const SignUp = () => {
       <FormControl id="email_signUp" isRequired>
         <FormLabel>Email</FormLabel>
         <Input
+          type="email"
           placeholder="Enter Your Email"
+          borderColor="#6272a4"
+          focusBorderColor="#6272a4"
           onChange={e => setEmail(e.target.value)}
         />
       </FormControl>
@@ -158,10 +163,18 @@ const SignUp = () => {
           <Input
             type={show ? 'text' : 'password'}
             placeholder="Enter Your Password"
+            borderColor="#6272a4"
+            focusBorderColor="#6272a4"
             onChange={e => setPassword(e.target.value)}
           />
           <InputRightElement width="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={handleClick}>
+            <Button
+              h="1.75rem"
+              size="sm"
+              colorScheme="whiteAlpha"
+              bg="transparent"
+              onClick={handleClick}
+            >
               {show ? 'Hide' : 'Show'}
             </Button>
           </InputRightElement>
@@ -174,10 +187,18 @@ const SignUp = () => {
           <Input
             type={show ? 'text' : 'password'}
             placeholder="Password Confirm"
+            borderColor="#6272a4"
+            focusBorderColor="#6272a4"
             onChange={e => setPasswordConfirm(e.target.value)}
           />
           <InputRightElement width="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={handleClick}>
+            <Button
+              h="1.75rem"
+              size="sm"
+              colorScheme="whiteAlpha"
+              bg="transparent"
+              onClick={handleClick}
+            >
               {show ? 'Hide' : 'Show'}
             </Button>
           </InputRightElement>
@@ -186,11 +207,17 @@ const SignUp = () => {
 
       <FormControl id="pic_signUp">
         <FormLabel>Profile Picture</FormLabel>
-        <Input type="file" p={1.5} accept="image/*" onChange={postDetails} />
+        <Input
+          type="file"
+          p={1.5}
+          accept="image/*"
+          onChange={postDetails}
+          borderColor="#6272a4"
+        />
       </FormControl>
 
       <Button
-        colorScheme="blue"
+        colorScheme="facebook"
         width="100%"
         style={{ marginTop: 15 }}
         onClick={submitHandler}

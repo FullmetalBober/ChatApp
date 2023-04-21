@@ -57,8 +57,8 @@ const Homepage = () => {
       >
         <Tabs variant="soft-rounded">
           <TabList mb="1em">
-            <Tab width="50%">Login</Tab>
-            <Tab width="50%">Sign Up</Tab>
+            <Tab width="50%" _selected={{bg: '#bd93f9'}} color='#f8f8f2'>Login</Tab>
+            <Tab width="50%" _selected={{bg: '#bd93f9'}} color='#f8f8f2'>Sign Up</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>

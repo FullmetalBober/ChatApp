@@ -178,7 +178,7 @@ const SideDrawer = () => {
         </Text>
         <div>
           <Menu>
-            <MenuButton p={1}>
+            <MenuButton p={1} as={Button} colorScheme="whiteAlpha" bg="#535669">
               <NotificationBadge
                 count={notifications.length}
                 effect={Effect.SCALE}

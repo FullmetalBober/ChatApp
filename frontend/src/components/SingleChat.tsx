@@ -166,7 +166,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }: any) => {
             justifyContent={{ base: 'space-between' }}
             alignItems="center"
             borderBottom="1px"
-            borderColor='#6272a4'
+            borderColor="#6272a4"
           >
             <IconButton
               display={{ base: 'flex', md: 'none' }}
@@ -186,7 +186,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }: any) => {
               </>
             ) : (
               <>
-                {selectedChat.chatName}
+                <Box display="flex">
+                  {selectedChat.chatName}
+                  {isTyping && <Typing />}
+                </Box>
                 <UpdateGroupChatModal
                   fetchAgain={fetchAgain}
                   setFetchAgain={setFetchAgain}
@@ -224,6 +227,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }: any) => {
                 borderColor="#6272a4"
                 focusBorderColor="#6272a4"
                 placeholder="Enter a message..."
+                autoComplete="off"
                 onChange={typingHandler}
                 value={newMessage}
               />

@@ -80,7 +80,10 @@ const Login = () => {
       <FormControl id="email_login" isRequired>
         <FormLabel>Email</FormLabel>
         <Input
+          type="email"
           placeholder="Enter Your Email"
+          borderColor="#6272a4"
+          focusBorderColor="#6272a4"
           onChange={e => setEmail(e.target.value)}
         />
       </FormControl>
@@ -91,10 +94,18 @@ const Login = () => {
           <Input
             type={show ? 'text' : 'password'}
             placeholder="Enter Your Password"
+            borderColor="#6272a4"
+            focusBorderColor="#6272a4"
             onChange={e => setPassword(e.target.value)}
           />
           <InputRightElement width="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={handleClick}>
+            <Button
+              h="1.75rem"
+              size="sm"
+              colorScheme="whiteAlpha"
+              bg="transparent"
+              onClick={handleClick}
+            >
               {show ? 'Hide' : 'Show'}
             </Button>
           </InputRightElement>
@@ -102,7 +113,7 @@ const Login = () => {
       </FormControl>
 
       <Button
-        colorScheme="blue"
+        colorScheme="facebook"
         width="100%"
         style={{ marginTop: 15 }}
         onClick={submitHandler}

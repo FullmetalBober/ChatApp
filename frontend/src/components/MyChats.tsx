@@ -61,20 +61,17 @@ const MyChats = ({ fetchAgain }: any) => {
       borderColor="#6272a4"
     >
       <Box
-        pb={3}
         px={3}
         fontSize={{ base: '28px', md: '30px' }}
         fontFamily="Work sans"
-        display="flex"
         w="100%"
-        justifyContent="space-between"
         alignItems="center"
       >
-        My Chats
         <GroupChatModal>
           <Button
             display="flex"
-            fontSize={{ base: '17px', md: '10px', lg: '17px' }}
+            w="100%"
+            fontSize='18px'
             rightIcon={<AddIcon />}
             colorScheme="whiteAlpha"
             bg="transparent"
