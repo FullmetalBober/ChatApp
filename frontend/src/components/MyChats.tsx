@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { ChatState } from '../Context/ChatProvider';
 import { Box, Button, Stack, Text, useToast } from '@chakra-ui/react';
 import axios, { AxiosError } from 'axios';
@@ -10,11 +10,11 @@ import GroupChatModal from './miscellaneous/GroupChatModal';
 
 const MyChats = ({ fetchAgain }: any) => {
   const [loggedUser, setLoggedUser] = useState<any>();
-  const { user, selectedChat, setSelectedChat, chats, setChats } = ChatState();
+  const { selectedChat, setSelectedChat, chats, setChats } = ChatState();
 
   const toast = useToast();
 
-  const fetchChats = async () => {
+  const fetchChats = useCallback(async () => {
     try {
       const config = {
         headers: {
@@ -37,13 +37,13 @@ const MyChats = ({ fetchAgain }: any) => {
         position: 'bottom-left',
       });
     }
-  };
+  }, [toast, setChats]);
 
   useEffect(() => {
     const cookies = new Cookies();
     setLoggedUser(cookies.get('userInfo').user);
     fetchChats();
-  }, [fetchAgain]);
+  }, [fetchAgain, fetchChats]);
 
   return (
     <Box

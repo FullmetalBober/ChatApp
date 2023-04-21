@@ -15,7 +15,6 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ChatState } from '../../Context/ChatProvider';
-import { Form } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 import UserListItem from '../UserAvatar/UserListItem';
 import UserBadgeItem from '../UserAvatar/UserBadgeItem';
@@ -30,7 +29,7 @@ const GroupChatModal = ({ children }: any) => {
 
   const toast = useToast();
 
-  const { user, chats, setChats } = ChatState();
+  const { chats, setChats } = ChatState();
 
   const handleSearch = async (query: string) => {
     setSearch(query);

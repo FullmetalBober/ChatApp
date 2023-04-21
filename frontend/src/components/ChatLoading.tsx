@@ -1,21 +1,12 @@
 import { Skeleton, Stack } from '@chakra-ui/react';
 
 const ChatLoading = () => {
-  return (
-    <Stack>
-      <Skeleton height="45px" />
-      <Skeleton height="45px" />
-      <Skeleton height="45px" />
-      <Skeleton height="45px" />
-      <Skeleton height="45px" />
-      <Skeleton height="45px" />
-      <Skeleton height="45px" />
-      <Skeleton height="45px" />
-      <Skeleton height="45px" />
-      <Skeleton height="45px" />
-      <Skeleton height="45px" />
-    </Stack>
-  );
+  const skeletons = [];
+  for (let i = 0; i < 11; i++) {
+    skeletons.push(<Skeleton key={i} height="45px" />);
+  }
+
+  return <Stack>{skeletons}</Stack>;
 };
 
 export default ChatLoading;
