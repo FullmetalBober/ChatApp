@@ -86,7 +86,7 @@ const GroupChatModal = ({ children }: any) => {
         '/api/chats/group',
         {
           name: groupChatName,
-          users: JSON.stringify(selectedUsers.map((user: any) => user._id)),
+          users: selectedUsers.map((user: any) => user._id),
         },
         config
       );

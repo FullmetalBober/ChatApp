@@ -5,13 +5,11 @@ const Chat = require('../models/chatModel');
 exports.createMessage = asyncHandler(async (req, res, next) => {
   const { content, chatId } = req.body;
 
-  let newMessage = {
+  let message = await Message.create({
     sender: req.user.id,
     content,
     chat: chatId,
-  };
-
-  let message = await Message.create(newMessage);
+  });
 
   message = await message.populate('sender');
 
@@ -22,15 +20,11 @@ exports.createMessage = asyncHandler(async (req, res, next) => {
     },
   });
 
-  await Chat.findByIdAndUpdate(chatId, {
-    latestMessage: message,
-  });
+  await Chat.findByIdAndUpdate(chatId, { latestMessage: message });
 
   res.status(201).json({
     status: 'success',
-    data: {
-      message,
-    },
+    data: { message },
   });
 });
 
