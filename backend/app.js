@@ -22,6 +22,8 @@ app.enable('trust proxy');
 app.use(cors());
 app.options('*', cors());
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(helmet());
 
 const limiter = rateLimit({
@@ -51,14 +53,14 @@ app.use('/api/users', userRouter);
 app.use('/api/chats', chatRouter);
 app.use('/api/messages', messageRouter);
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(path.resolve(), '/frontend', '/build')));
-  app.get('*', (req, res) => {
-    res.sendFile(
-      path.resolve(path.resolve(), 'frontend', 'build', 'index.html')
-    );
-  });
-}
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static(path.join(path.resolve(), '/frontend', '/build')));
+//   app.get('*', (req, res) => {
+//     res.sendFile(
+//       path.resolve(path.resolve(), 'frontend', 'build', 'index.html')
+//     );
+//   });
+// }
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

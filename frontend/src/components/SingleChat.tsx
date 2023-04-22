@@ -19,9 +19,7 @@ import ScrollableChat from './ScrollableChat';
 import { io } from 'socket.io-client';
 import Typing from './miscellaneous/Typing';
 
-let ENDPOINT = 'http://localhost:8000';
-if (process.env.NODE_ENV === 'production')
-  ENDPOINT = 'https://chat-app-phi-five.vercel.app/';
+const ENDPOINT = 'http://localhost:8000';
 
 let socket: any, selectedChatCompare: any;
 
