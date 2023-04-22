@@ -206,7 +206,7 @@ const UpdateGroupChatModal = ({
       };
 
       const { data } = await axios.get(`/api/users?search=${search}`, config);
-      setSearchResults(data.data.data);
+      setSearchResults(data.data);
       setLoading(false);
     } catch (error) {
       let errorMessage = 'Something went wrong';
