@@ -19,7 +19,10 @@ import ScrollableChat from './ScrollableChat';
 import { io } from 'socket.io-client';
 import Typing from './miscellaneous/Typing';
 
-const ENDPOINT = 'http://localhost:8000';
+let ENDPOINT = 'http://localhost:8000';
+if (process.env.NODE_ENV === 'production')
+  ENDPOINT = 'https://chat-app-phi-five.vercel.app/';
+
 let socket: any, selectedChatCompare: any;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }: any) => {
