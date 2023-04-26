@@ -58,7 +58,7 @@ io.on('connection', socket => {
     });
   });
 
-  socket.off('setup', () => {
+  socket.off('setup', userData => {
     socket.leave(userData._id);
   });
 });
